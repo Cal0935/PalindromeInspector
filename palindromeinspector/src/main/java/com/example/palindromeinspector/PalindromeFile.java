@@ -1,13 +1,13 @@
 package com.example.palindromeinspector;
 
-
 import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +15,19 @@ import java.util.stream.Collectors;
 public class PalindromeFile {
 
     private static final String FILE_PATH = "palindromes.txt";
+    private static final String HEADER = "Username,Text,IsPalindrome,Timestamp";
 
-    public void persist(String text, boolean isPalindrome) {
+    public void persist(String username, String text, boolean isPalindrome, LocalDateTime timestamp) {
         try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
-            writer.write(text + "," + isPalindrome + "\n");
+            // Determines if the file is blank
+            if (Files.size(Paths.get(FILE_PATH)) == 0) {
+                writer.write(HEADER + System.lineSeparator());
+            }
+
+            // Format the data as CSV and append it
+            String data = String.format("%s,%s,%s,%s%n",
+                    username, text, isPalindrome, timestamp.format(DateTimeFormatter.ISO_DATE_TIME));
+            writer.write(data);
         } catch (IOException e) {
             e.printStackTrace();
         }

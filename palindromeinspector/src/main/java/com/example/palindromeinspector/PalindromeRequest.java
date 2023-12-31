@@ -1,17 +1,21 @@
 package com.example.palindromeinspector;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class PalindromeRequest {
     
     private String username;
     private String text;
-    private LocalDateTime dateTime;
+    private String dateTime;
+
+    public PalindromeRequest() {
+    }
 
     public PalindromeRequest(String username, String text, LocalDateTime dateTime) {
         this.username = username;
         this.text = text;
-        this.dateTime = dateTime;
+        this.dateTime = dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public String getUsername() {
@@ -31,10 +35,10 @@ public class PalindromeRequest {
     }
 
     public LocalDateTime getDateTime() {
-        return dateTime;
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+        this.dateTime = dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 }
