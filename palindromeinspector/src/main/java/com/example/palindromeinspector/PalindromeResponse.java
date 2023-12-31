@@ -1,13 +1,18 @@
 package com.example.palindromeinspector;
 
+import java.time.LocalDateTime;
+
 public class PalindromeResponse {
 
+    private String username;
+    private String text;
     private boolean isPalindrome;
-    private String message;
+    private LocalDateTime timestamp;
 
-    public PalindromeResponse(boolean isPalindrome, String message) {
+    public PalindromeResponse(boolean isPalindrome, String username, String timestamp) {
         this.isPalindrome = isPalindrome;
-        this.message = message;
+        this.username = username;
+        this.timestamp = LocalDateTime.parse(timestamp);
     }
 
     public boolean isPalindrome() {
@@ -18,11 +23,27 @@ public class PalindromeResponse {
         isPalindrome = palindrome;
     }
 
-    public String getMessage() {
-        return message;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

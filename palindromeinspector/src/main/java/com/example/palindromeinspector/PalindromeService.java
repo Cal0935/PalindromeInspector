@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class PalindromeService {
+
 
     @Autowired
     private PalindromeValidator palindromeValidator;
@@ -20,15 +22,22 @@ public class PalindromeService {
 
     @Cacheable("palindromes")
     public PalindromeResponse checkPalindrome(PalindromeRequest request) {
-        if (!palindromeValidator.isValid(request.getText())) {
-            return new PalindromeResponse(false, "Invalid input");
+        String username = request.getUsername();
+        String text = request.getText();
+
+        // Validate input
+        if (!palindromeValidator.isValid(text)) {
+            return new PalindromeResponse(false, "Invalid input", null);
         }
 
-        boolean isPalindrome = isPalindrome(request.getText());
+        boolean isPalindrome = isPalindrome(text);
+        LocalDateTime dateTime = LocalDateTime.now();
 
-        persistenceService.persist(request.getText(), isPalindrome);
+        // Persist the result
+        persistenceService.persist(text, isPalindrome);
 
-        return new PalindromeResponse(isPalindrome, null);
+        // Return the response
+        return new PalindromeResponse(isPalindrome, username, dateTime.toString());
     }
 
     private boolean isPalindrome(String text) {
