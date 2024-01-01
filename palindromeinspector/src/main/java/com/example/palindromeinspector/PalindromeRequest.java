@@ -35,10 +35,10 @@ public class PalindromeRequest {
     }
 
     public LocalDateTime getDateTime() {
-        return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+        return dateTime != null ? LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME) : LocalDateTime.now();
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
+        this.dateTime = dateTime != null ? dateTime.format(DateTimeFormatter.ISO_DATE_TIME) : null;
     }
 }
