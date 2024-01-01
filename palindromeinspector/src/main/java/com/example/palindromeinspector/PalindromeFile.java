@@ -19,14 +19,14 @@ public class PalindromeFile {
 
     public void persist(String username, String text, boolean isPalindrome, LocalDateTime timestamp) {
         try (FileWriter writer = new FileWriter(FILE_PATH, true)) {
-            // Determines if the file is blank
             if (Files.size(Paths.get(FILE_PATH)) == 0) {
                 writer.write(HEADER + System.lineSeparator());
             }
 
-            // Format the data as CSV and append it
+            // Format the data as CSV and append it to the file
+            String formattedTimestamp = timestamp.format(DateTimeFormatter.ofPattern("HH-mm-ss, dd-MM-yyyy"));
             String data = String.format("%s,%s,%s,%s%n",
-                    username, text, isPalindrome, timestamp.format(DateTimeFormatter.ISO_DATE_TIME));
+                    username, text, isPalindrome, formattedTimestamp);
             writer.write(data);
         } catch (IOException e) {
             e.printStackTrace();

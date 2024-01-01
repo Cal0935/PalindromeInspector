@@ -1,0 +1,2 @@
+Username,Text,IsPalindrome,Timestamp
+Jack,madam,true,2023-12-31T21:25:11.7060497
