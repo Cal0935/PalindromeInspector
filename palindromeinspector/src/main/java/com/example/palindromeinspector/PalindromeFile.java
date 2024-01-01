@@ -22,7 +22,10 @@ public class PalindromeFile {
             if (Files.size(Paths.get(FILE_PATH)) == 0) {
                 writer.write(HEADER + System.lineSeparator());
             }
-
+            if (username == null || text == null || timestamp == null) {
+                return;
+            }
+    
             // Format the data as CSV and append it to the file
             String formattedTimestamp = timestamp.format(DateTimeFormatter.ofPattern("HH-mm-ss, dd-MM-yyyy"));
             String data = String.format("%s,%s,%s,%s%n",
@@ -32,6 +35,7 @@ public class PalindromeFile {
             e.printStackTrace();
         }
     }
+    
 
     public List<String> loadPersistedValues() {
         try {
