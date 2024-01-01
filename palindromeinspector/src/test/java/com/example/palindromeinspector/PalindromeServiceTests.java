@@ -30,7 +30,7 @@ public class PalindromeServiceTests {
     @Test
     public void testCheckPalindrome_ValidPalindrome() {
         // Arrange
-        PalindromeRequest request = new PalindromeRequest("john_doe", "madam", LocalDateTime.now());
+        PalindromeRequest request = new PalindromeRequest("Charlie", "madam", LocalDateTime.now());
         when(palindromeValidator.isValid("madam")).thenReturn(true);
 
         // Act
@@ -38,15 +38,15 @@ public class PalindromeServiceTests {
 
         // Assert
         assertTrue(response.isPalindrome());
-        assertEquals("john_doe", response.getUsername());
+        assertEquals("Charlie", response.getUsername());
         assertNotNull(response.getTimestamp());
-        verify(persistenceService).persist(eq("john_doe"), eq("madam"), eq(true), any(LocalDateTime.class));
+        verify(persistenceService).persist(eq("Charlie"), eq("madam"), eq(true), any(LocalDateTime.class));
     }
 
     @Test
     public void testCheckPalindrome_InvalidInput() {
         // Arrange
-        PalindromeRequest request = new PalindromeRequest("john_doe", "12345", LocalDateTime.now());
+        PalindromeRequest request = new PalindromeRequest("John", "12345", LocalDateTime.now());
         when(palindromeValidator.isValid("12345")).thenReturn(false);
 
         // Act
