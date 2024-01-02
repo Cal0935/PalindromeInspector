@@ -7,4 +7,4 @@ Before running the application, make sure you have the following installed:
 
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html)
 - [Gradle](https://gradle.org/install/) (Optional, as the project includes the Gradle Wrapper)
-- [Postman] (Optional, for the purposes of submitting your input and examining the cached data)
+- [Postman](https://www.postman.com/downloads/) (Optional, for the purposes of submitting your input and examining the cached data)
